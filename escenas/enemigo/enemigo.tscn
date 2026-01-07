@@ -1,0 +1,58 @@
+[gd_scene load_steps=7 format=3 uid="uid://c5blocrlej1a8"]
+
+[ext_resource type="Script" uid="uid://dob1xht4nd8x6" path="res://escenas/enemigo/enemigo.gd" id="1_r46xo"]
+[ext_resource type="SpriteFrames" uid="uid://xn3dhru08ser" path="res://escenas/enemigo/enemigo_sprites.tres" id="2_r46xo"]
+[ext_resource type="PackedScene" uid="uid://co6a5b0jf07ej" path="res://escenas/enemigo/ataques/salto/humo_caida.tscn" id="3_07say"]
+[ext_resource type="PackedScene" uid="uid://dwhiel60f2hti" path="res://escenas/enemigo/ataques/slash/slashenemigo.tscn" id="4_wc1l2"]
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_r46xo"]
+size = Vector2(57, 50)
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_07say"]
+size = Vector2(305, 261)
+
+[node name="Enemigo" type="CharacterBody2D" node_paths=PackedStringArray("sprite", "area_atq", "humo", "espadazo")]
+z_index = 2
+collision_layer = 8
+collision_mask = 5
+script = ExtResource("1_r46xo")
+sprite = NodePath("AnimatedSprite2D")
+_velocidad = 100.0
+area_atq = NodePath("area_atq")
+humo = NodePath("humo")
+espadazo = NodePath("Slashenemigo")
+
+[node name="AnimatedSprite2D" type="AnimatedSprite2D" parent="."]
+sprite_frames = ExtResource("2_r46xo")
+animation = &"idle_down"
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="."]
+position = Vector2(-0.5, -1)
+shape = SubResource("RectangleShape2D_r46xo")
+
+[node name="Timer" type="Timer" parent="."]
+wait_time = 0.2
+autostart = true
+
+[node name="NavigationAgent2D" type="NavigationAgent2D" parent="."]
+target_desired_distance = 60.5
+
+[node name="area_atq" type="Area2D" parent="."]
+collision_layer = 0
+collision_mask = 4
+
+[node name="colision_en" type="CollisionShape2D" parent="area_atq"]
+visible = false
+shape = SubResource("RectangleShape2D_07say")
+
+[node name="humo" parent="." instance=ExtResource("3_07say")]
+visible = false
+z_index = -1
+position = Vector2(0, -14)
+scale = Vector2(14.525, 14.525)
+
+[node name="Slashenemigo" parent="." instance=ExtResource("4_wc1l2")]
+visible = false
+scale = Vector2(2.105, 2.105)
+
+[connection signal="timeout" from="Timer" to="." method="_on_timer_timeout"]

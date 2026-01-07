@@ -1,0 +1,51 @@
+[gd_scene load_steps=5 format=3 uid="uid://dg47am2x7xry2"]
+
+[ext_resource type="Script" uid="uid://cw3jt2fjexckn" path="res://escenas/menus/menus.gd" id="1_1lor4"]
+[ext_resource type="Script" uid="uid://chbx8o2wmkgjl" path="res://escenas/menus/boton_jugar.gd" id="1_wv6ri"]
+[ext_resource type="Script" uid="uid://kxukbdldxmx5" path="res://escenas/menus/boton_salir.gd" id="2_1lor4"]
+[ext_resource type="PackedScene" uid="uid://bq8u3vwpqq7u4" path="res://escenas/escena_principal/escena_principal.tscn" id="3_3t7ux"]
+
+[node name="Menu" type="Control" node_paths=PackedStringArray("texto", "jugar", "salir")]
+layout_mode = 3
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+script = ExtResource("1_1lor4")
+texto = NodePath("VBoxContainer/Texto")
+jugar = NodePath("VBoxContainer/Jugar")
+salir = NodePath("VBoxContainer/Salir")
+
+[node name="VBoxContainer" type="VBoxContainer" parent="."]
+layout_mode = 1
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_left = -33.0
+offset_top = -46.5
+offset_right = 33.0
+offset_bottom = 46.5
+grow_horizontal = 2
+grow_vertical = 2
+
+[node name="Texto" type="Label" parent="VBoxContainer"]
+layout_mode = 2
+theme_override_font_sizes/font_size = 66
+text = "Mi juego"
+horizontal_alignment = 1
+
+[node name="Jugar" type="Button" parent="VBoxContainer"]
+layout_mode = 2
+theme_override_font_sizes/font_size = 66
+text = "Jugar"
+script = ExtResource("1_wv6ri")
+escena_principal = ExtResource("3_3t7ux")
+
+[node name="Salir" type="Button" parent="VBoxContainer"]
+layout_mode = 2
+theme_override_font_sizes/font_size = 66
+text = "Salir"
+script = ExtResource("2_1lor4")

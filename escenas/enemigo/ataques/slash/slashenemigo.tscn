@@ -1,0 +1,29 @@
+[gd_scene load_steps=4 format=3 uid="uid://dwhiel60f2hti"]
+
+[ext_resource type="SpriteFrames" uid="uid://dbnwa0ckakmd7" path="res://escenas/espadazo/espadazo.tres" id="1_boob3"]
+[ext_resource type="Script" uid="uid://d1eawata5leid" path="res://escenas/enemigo/ataques/slash/slash_enemigo.gd" id="1_ml7x7"]
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_ml7x7"]
+size = Vector2(93, 92)
+
+[node name="Slashenemigo" type="Node2D" node_paths=PackedStringArray("anim_ataque", "area")]
+script = ExtResource("1_ml7x7")
+anim_ataque = NodePath("atq_jugador")
+area = NodePath("Hitbox")
+
+[node name="Hitbox" type="Area2D" parent="."]
+collision_layer = 16
+collision_mask = 8
+monitoring = false
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="Hitbox"]
+position = Vector2(-0.5, -2)
+shape = SubResource("RectangleShape2D_ml7x7")
+
+[node name="atq_jugador" type="AnimatedSprite2D" parent="."]
+modulate = Color(0.760784, 0, 0, 1)
+scale = Vector2(2.65625, 2.5625)
+sprite_frames = ExtResource("1_boob3")
+animation = &"ataque"
+frame = 3
+frame_progress = 1.0

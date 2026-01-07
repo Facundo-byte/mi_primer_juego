@@ -1,0 +1,27 @@
+[gd_scene load_steps=5 format=3 uid="uid://b28kpkrue125o"]
+
+[ext_resource type="Script" uid="uid://cbe8r30ohuak3" path="res://escenas/personaje/personaje.gd" id="1_yv5yb"]
+[ext_resource type="PackedScene" uid="uid://boa0nqil151cx" path="res://escenas/espadazo/espadazo.tscn" id="2_wky4x"]
+[ext_resource type="SpriteFrames" uid="uid://dq5u36olxsdcm" path="res://escenas/personaje/personaje_temporal.tres" id="2_yv5yb"]
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_yv5yb"]
+size = Vector2(16, 16)
+
+[node name="Personaje" type="CharacterBody2D" node_paths=PackedStringArray("animacion")]
+z_index = 2
+collision_layer = 4
+collision_mask = 11
+platform_floor_layers = 4294967040
+script = ExtResource("1_yv5yb")
+animacion = NodePath("AnimatedSprite2D")
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="."]
+position = Vector2(0, -1)
+shape = SubResource("RectangleShape2D_yv5yb")
+
+[node name="Espadazo" parent="." instance=ExtResource("2_wky4x")]
+visible = false
+
+[node name="AnimatedSprite2D" type="AnimatedSprite2D" parent="."]
+sprite_frames = ExtResource("2_yv5yb")
+animation = &"idle_down"

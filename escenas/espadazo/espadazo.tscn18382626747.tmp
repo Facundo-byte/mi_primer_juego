@@ -1,0 +1,24 @@
+[gd_scene load_steps=4 format=3 uid="uid://boa0nqil151cx"]
+
+[ext_resource type="SpriteFrames" uid="uid://dbnwa0ckakmd7" path="res://escenas/espadazo/espadazo.tres" id="1_diom0"]
+[ext_resource type="Script" uid="uid://pbeaxx3h6jem" path="res://escenas/espadazo/espadazo.gd" id="1_nbx00"]
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_d703y"]
+size = Vector2(93, 92)
+
+[node name="Espadazo" type="Node2D" node_paths=PackedStringArray("anim_ataque")]
+script = ExtResource("1_nbx00")
+anim_ataque = NodePath("atq_jugador")
+
+[node name="Hitbox" type="Area2D" parent="."]
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="Hitbox"]
+position = Vector2(-0.5, -2)
+shape = SubResource("RectangleShape2D_d703y")
+
+[node name="atq_jugador" type="AnimatedSprite2D" parent="."]
+scale = Vector2(2.65625, 2.5625)
+sprite_frames = ExtResource("1_diom0")
+animation = &"ataque"
+frame = 3
+frame_progress = 1.0

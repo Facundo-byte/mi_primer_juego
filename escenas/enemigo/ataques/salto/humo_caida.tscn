@@ -1,0 +1,63 @@
+[gd_scene load_steps=9 format=3 uid="uid://co6a5b0jf07ej"]
+
+[ext_resource type="Texture2D" uid="uid://cywu7nvox2aud" path="res://sprites/caida.png" id="1_c5lgq"]
+[ext_resource type="Script" uid="uid://b52mjngkuls1x" path="res://escenas/enemigo/ataques/salto/humo_caida.gd" id="1_y2d4s"]
+
+[sub_resource type="CapsuleShape2D" id="CapsuleShape2D_y2d4s"]
+radius = 8.0
+height = 28.0
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_0mpxx"]
+atlas = ExtResource("1_c5lgq")
+region = Rect2(0, 0, 32, 32)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_j1jxm"]
+atlas = ExtResource("1_c5lgq")
+region = Rect2(32, 0, 32, 32)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_cspov"]
+atlas = ExtResource("1_c5lgq")
+region = Rect2(64, 0, 32, 32)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_8w5l6"]
+atlas = ExtResource("1_c5lgq")
+region = Rect2(96, 0, 32, 32)
+
+[sub_resource type="SpriteFrames" id="SpriteFrames_ksh5w"]
+animations = [{
+"frames": [{
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_0mpxx")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_j1jxm")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_cspov")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_8w5l6")
+}],
+"loop": true,
+"name": &"onda_expansiva",
+"speed": 5.0
+}]
+
+[node name="humo" type="Node2D" node_paths=PackedStringArray("area", "anim_humo")]
+script = ExtResource("1_y2d4s")
+area = NodePath("colision")
+anim_humo = NodePath("AnimatedSprite2D")
+
+[node name="colision" type="Area2D" parent="."]
+collision_layer = 0
+collision_mask = 4
+monitoring = false
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="colision"]
+position = Vector2(0, 2)
+rotation = 1.5708
+shape = SubResource("CapsuleShape2D_y2d4s")
+
+[node name="AnimatedSprite2D" type="AnimatedSprite2D" parent="."]
+sprite_frames = SubResource("SpriteFrames_ksh5w")
+animation = &"onda_expansiva"

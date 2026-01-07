@@ -1,0 +1,30 @@
+[gd_scene load_steps=4 format=3 uid="uid://c5blocrlej1a8"]
+
+[ext_resource type="Script" uid="uid://dob1xht4nd8x6" path="res://escenas/enemigo/enemigo.gd" id="1_r46xo"]
+[ext_resource type="SpriteFrames" uid="uid://xn3dhru08ser" path="res://escenas/enemigo/enemigo_sprites.tres" id="2_r46xo"]
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_r46xo"]
+size = Vector2(45, 53)
+
+[node name="Enemigo" type="CharacterBody2D" node_paths=PackedStringArray("sprite")]
+modulate = Color(1, 0, 1, 1)
+z_index = 2
+script = ExtResource("1_r46xo")
+sprite = NodePath("AnimatedSprite2D")
+_velocidad = 100.0
+
+[node name="AnimatedSprite2D" type="AnimatedSprite2D" parent="."]
+sprite_frames = ExtResource("2_r46xo")
+animation = &"idle_left_right_up"
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="."]
+position = Vector2(-0.5, -0.5)
+shape = SubResource("RectangleShape2D_r46xo")
+
+[node name="Timer" type="Timer" parent="."]
+wait_time = 0.504
+autostart = true
+
+[node name="NavigationAgent2D" type="NavigationAgent2D" parent="."]
+
+[connection signal="timeout" from="Timer" to="." method="_on_timer_timeout"]
