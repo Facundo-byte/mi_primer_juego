@@ -1,8 +1,9 @@
-[gd_scene load_steps=6 format=3 uid="uid://b28kpkrue125o"]
+[gd_scene load_steps=7 format=3 uid="uid://b28kpkrue125o"]
 
 [ext_resource type="Script" uid="uid://cbe8r30ohuak3" path="res://escenas/personaje/personaje.gd" id="1_yv5yb"]
 [ext_resource type="PackedScene" uid="uid://boa0nqil151cx" path="res://escenas/espadazo/espadazo.tscn" id="2_wky4x"]
 [ext_resource type="SpriteFrames" uid="uid://dq5u36olxsdcm" path="res://escenas/personaje/personaje_temporal.tres" id="2_yv5yb"]
+[ext_resource type="Texture2D" uid="uid://csbrp7ytatjlr" path="res://sprites/sombra.png" id="4_n3eqy"]
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_yv5yb"]
 size = Vector2(46, 47)
@@ -20,6 +21,7 @@ animacion = NodePath("mov_jugador")
 colision = NodePath("area_pj")
 
 [node name="colision_entorno" type="CollisionShape2D" parent="."]
+visible = false
 position = Vector2(0, 1.5)
 shape = SubResource("RectangleShape2D_yv5yb")
 
@@ -27,7 +29,8 @@ shape = SubResource("RectangleShape2D_yv5yb")
 
 [node name="mov_jugador" type="AnimatedSprite2D" parent="."]
 sprite_frames = ExtResource("2_yv5yb")
-animation = &"idle_down"
+animation = &"idle_upandright"
+frame_progress = 0.71079534
 
 [node name="area_pj" type="Area2D" parent="."]
 visible = false
@@ -37,3 +40,10 @@ collision_mask = 8
 [node name="colision_enemigo" type="CollisionShape2D" parent="area_pj"]
 position = Vector2(0.5, 1.5)
 shape = SubResource("RectangleShape2D_wky4x")
+
+[node name="sombra" type="Sprite2D" parent="."]
+modulate = Color(1, 1, 1, 0.3019608)
+z_index = -1
+position = Vector2(3, 18)
+scale = Vector2(2.140625, 2.0546877)
+texture = ExtResource("4_n3eqy")

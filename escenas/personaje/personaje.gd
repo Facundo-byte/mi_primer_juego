@@ -19,11 +19,8 @@ var dashing := false
 var puede_dash := true
 
 #knockback
-@export var fuerza_knockback := 400.0
-@export var duracion_knockback := 0.15
-
 var en_knockback := false
-var dir_knockback := Vector2.ZERO
+
 
 func _ready():
 	add_to_group("jugador")

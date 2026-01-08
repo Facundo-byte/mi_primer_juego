@@ -1,9 +1,10 @@
-[gd_scene load_steps=7 format=3 uid="uid://c5blocrlej1a8"]
+[gd_scene load_steps=8 format=3 uid="uid://c5blocrlej1a8"]
 
 [ext_resource type="Script" uid="uid://dob1xht4nd8x6" path="res://escenas/enemigo/enemigo.gd" id="1_r46xo"]
 [ext_resource type="SpriteFrames" uid="uid://xn3dhru08ser" path="res://escenas/enemigo/enemigo_sprites.tres" id="2_r46xo"]
 [ext_resource type="PackedScene" uid="uid://co6a5b0jf07ej" path="res://escenas/enemigo/ataques/salto/humo_caida.tscn" id="3_07say"]
 [ext_resource type="PackedScene" uid="uid://dwhiel60f2hti" path="res://escenas/enemigo/ataques/slash/slashenemigo.tscn" id="4_wc1l2"]
+[ext_resource type="Texture2D" uid="uid://csbrp7ytatjlr" path="res://sprites/sombra.png" id="5_ia6sk"]
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_r46xo"]
 size = Vector2(57, 50)
@@ -23,10 +24,12 @@ humo = NodePath("humo")
 espadazo = NodePath("Slashenemigo")
 
 [node name="AnimatedSprite2D" type="AnimatedSprite2D" parent="."]
+scale = Vector2(0.965, 0.965)
 sprite_frames = ExtResource("2_r46xo")
 animation = &"idle_down"
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="."]
+visible = false
 position = Vector2(-0.5, -1)
 shape = SubResource("RectangleShape2D_r46xo")
 
@@ -54,5 +57,12 @@ scale = Vector2(14.525, 14.525)
 [node name="Slashenemigo" parent="." instance=ExtResource("4_wc1l2")]
 visible = false
 scale = Vector2(2.105, 2.105)
+
+[node name="sombra" type="Sprite2D" parent="."]
+modulate = Color(1, 1, 1, 0.3019608)
+z_index = -1
+position = Vector2(3, 18)
+scale = Vector2(2.140625, 2.0546877)
+texture = ExtResource("5_ia6sk")
 
 [connection signal="timeout" from="Timer" to="." method="_on_timer_timeout"]
