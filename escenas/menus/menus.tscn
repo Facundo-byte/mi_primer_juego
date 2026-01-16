@@ -1,11 +1,55 @@
-[gd_scene load_steps=5 format=3 uid="uid://dg47am2x7xry2"]
+[gd_scene load_steps=23 format=3 uid="uid://dg47am2x7xry2"]
 
 [ext_resource type="Script" uid="uid://cw3jt2fjexckn" path="res://escenas/menus/menus.gd" id="1_1lor4"]
 [ext_resource type="Script" uid="uid://chbx8o2wmkgjl" path="res://escenas/menus/boton_jugar.gd" id="1_wv6ri"]
 [ext_resource type="Script" uid="uid://kxukbdldxmx5" path="res://escenas/menus/boton_salir.gd" id="2_1lor4"]
+[ext_resource type="Texture2D" uid="uid://bpb8s2t6chxfj" path="res://sprites/vajugar.png" id="2_2e1i8"]
+[ext_resource type="FontFile" uid="uid://c23o2by0e3dcp" path="res://fonts/PressStart2P-Regular.ttf" id="2_4oofs"]
+[ext_resource type="LabelSettings" uid="uid://b83jo0a6guxs1" path="res://escenas/menus/menus_estilo.tres" id="2_f5mth"]
+[ext_resource type="Texture2D" uid="uid://bb2lexupd0sbx" path="res://sprites/Jugar.png" id="2_ia0bt"]
 [ext_resource type="PackedScene" uid="uid://bq8u3vwpqq7u4" path="res://escenas/escena_principal/escena_principal.tscn" id="3_3t7ux"]
+[ext_resource type="Texture2D" uid="uid://cnhuyr78xtkb4" path="res://sprites/Salir.png" id="5_2e1i8"]
+[ext_resource type="Texture2D" uid="uid://h2olnjyrgi37" path="res://animacion_fondo/animacion1.png" id="10_yibuw"]
+[ext_resource type="Texture2D" uid="uid://dxl5ro8gxea66" path="res://animacion_fondo/animacion2.png" id="11_1wrrq"]
+[ext_resource type="Texture2D" uid="uid://dxrmvvyu7ssdk" path="res://animacion_fondo/animacion3.png" id="12_rll7c"]
+[ext_resource type="Texture2D" uid="uid://cmlom0bx7atai" path="res://animacion_fondo/animacion4.png" id="13_pr41s"]
+[ext_resource type="Texture2D" uid="uid://coxmroy6yhwy0" path="res://animacion_fondo/animacion5.png" id="14_vbt5b"]
+[ext_resource type="Texture2D" uid="uid://bcpdxwppwhstp" path="res://animacion_fondo/animacion6.png" id="15_wyey2"]
+[ext_resource type="Texture2D" uid="uid://cvc6mgexowd6p" path="res://animacion_fondo/animacion7.png" id="16_gwx61"]
+[ext_resource type="Texture2D" uid="uid://c5bn3loeym1dx" path="res://animacion_fondo/animacion8.png" id="17_55fet"]
+[ext_resource type="Texture2D" uid="uid://cb0rde45egrph" path="res://animacion_fondo/animacion9.png" id="18_kujlt"]
+[ext_resource type="Texture2D" uid="uid://cna8qjpcjv4hc" path="res://animacion_fondo/animacion10.png" id="19_ferxq"]
 
-[node name="Menu" type="Control" node_paths=PackedStringArray("texto", "jugar", "salir")]
+[sub_resource type="LabelSettings" id="LabelSettings_8lnoy"]
+font = ExtResource("2_4oofs")
+font_size = 86
+
+[sub_resource type="Theme" id="Theme_4oofs"]
+
+[sub_resource type="AnimatedTexture" id="AnimatedTexture_qe56y"]
+frames = 10
+speed_scale = 8.0
+frame_0/texture = ExtResource("10_yibuw")
+frame_1/texture = ExtResource("11_1wrrq")
+frame_1/duration = 1.0
+frame_2/texture = ExtResource("12_rll7c")
+frame_2/duration = 1.0
+frame_3/texture = ExtResource("13_pr41s")
+frame_3/duration = 1.0
+frame_4/texture = ExtResource("14_vbt5b")
+frame_4/duration = 1.0
+frame_5/texture = ExtResource("15_wyey2")
+frame_5/duration = 1.0
+frame_6/texture = ExtResource("16_gwx61")
+frame_6/duration = 1.0
+frame_7/texture = ExtResource("17_55fet")
+frame_7/duration = 1.0
+frame_8/texture = ExtResource("18_kujlt")
+frame_8/duration = 1.0
+frame_9/texture = ExtResource("19_ferxq")
+frame_9/duration = 1.0
+
+[node name="Menu" type="Control" node_paths=PackedStringArray("texto", "titulo", "jugar", "vajugar", "salir", "fondo")]
 layout_mode = 3
 anchors_preset = 15
 anchor_right = 1.0
@@ -13,39 +57,91 @@ anchor_bottom = 1.0
 grow_horizontal = 2
 grow_vertical = 2
 script = ExtResource("1_1lor4")
-texto = NodePath("VBoxContainer/Texto")
-jugar = NodePath("VBoxContainer/Jugar")
-salir = NodePath("VBoxContainer/Salir")
+texto = NodePath("vd")
+titulo = NodePath("Titulo")
+jugar = NodePath("Botones/Jugar")
+vajugar = NodePath("Botones/Volverajugar")
+salir = NodePath("Botones/Salir")
+fondo = NodePath("Fondo")
 
-[node name="VBoxContainer" type="VBoxContainer" parent="."]
+[node name="Titulo" type="Label" parent="."]
 layout_mode = 1
 anchors_preset = 8
 anchor_left = 0.5
 anchor_top = 0.5
 anchor_right = 0.5
 anchor_bottom = 0.5
-offset_left = -33.0
-offset_top = -46.5
-offset_right = 33.0
-offset_bottom = 46.5
+offset_left = -364.5
+offset_top = -203.81
+offset_right = 364.5
+offset_bottom = -122.80994
 grow_horizontal = 2
 grow_vertical = 2
-
-[node name="Texto" type="Label" parent="VBoxContainer"]
-layout_mode = 2
 theme_override_font_sizes/font_size = 66
-text = "Mi juego"
+text = "CUBE WARS"
+label_settings = ExtResource("2_f5mth")
 horizontal_alignment = 1
 
-[node name="Jugar" type="Button" parent="VBoxContainer"]
-layout_mode = 2
+[node name="vd" type="Label" parent="."]
+visible = false
+layout_mode = 1
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_left = -364.5
+offset_top = -203.81
+offset_right = 364.5
+offset_bottom = -122.80994
+grow_horizontal = 2
+grow_vertical = 2
 theme_override_font_sizes/font_size = 66
-text = "Jugar"
+text = "PERDISTE"
+label_settings = SubResource("LabelSettings_8lnoy")
+horizontal_alignment = 1
+
+[node name="Botones" type="VBoxContainer" parent="."]
+layout_mode = 1
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_left = -135.5
+offset_top = -101.0
+offset_right = 135.5
+offset_bottom = 101.0
+grow_horizontal = 2
+grow_vertical = 2
+theme_override_constants/separation = 14
+
+[node name="Jugar" type="TextureButton" parent="Botones"]
+layout_mode = 2
+texture_normal = ExtResource("2_ia0bt")
 script = ExtResource("1_wv6ri")
 escena_principal = ExtResource("3_3t7ux")
 
-[node name="Salir" type="Button" parent="VBoxContainer"]
+[node name="Volverajugar" type="TextureButton" parent="Botones"]
+visible = false
 layout_mode = 2
-theme_override_font_sizes/font_size = 66
-text = "Salir"
+texture_normal = ExtResource("2_2e1i8")
+script = ExtResource("1_wv6ri")
+escena_principal = ExtResource("3_3t7ux")
+
+[node name="Salir" type="TextureButton" parent="Botones"]
+layout_mode = 2
+theme = SubResource("Theme_4oofs")
+texture_normal = ExtResource("5_2e1i8")
 script = ExtResource("2_1lor4")
+
+[node name="Fondo" type="TextureRect" parent="."]
+z_index = -1
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+mouse_filter = 2
+texture = SubResource("AnimatedTexture_qe56y")

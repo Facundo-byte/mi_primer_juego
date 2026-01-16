@@ -2,9 +2,9 @@
 
 [ext_resource type="Script" uid="uid://8jx6erqitk0i" path="res://control.gd" id="1_c10tw"]
 [ext_resource type="PackedScene" uid="uid://bmsgctwslt1l3" path="res://escenas/UI/vidas/vidas.tscn" id="2_rqm1f"]
-[ext_resource type="Texture2D" uid="uid://cmfydb7ls561n" path="res://sprites/vida_boss_vacia.png" id="3_u2b40"]
-[ext_resource type="Texture2D" uid="uid://dxcr4nsbxy8mk" path="res://sprites/vida_boss_marco.png" id="4_8k7gk"]
-[ext_resource type="Texture2D" uid="uid://cjacx3r1xuaf3" path="res://sprites/vida_boss_llena.png" id="5_c1xht"]
+[ext_resource type="Texture2D" uid="uid://b1npa1cdil6lb" path="res://sprites/vida_vacia.png" id="3_u2b40"]
+[ext_resource type="Texture2D" uid="uid://dx2svtexu8mkv" path="res://sprites/vida_marco.png" id="4_8k7gk"]
+[ext_resource type="Texture2D" uid="uid://biq4buasalsiv" path="res://sprites/vida_llena.png" id="5_c1xht"]
 
 [node name="Control" type="Control" node_paths=PackedStringArray("vidas", "barra")]
 layout_mode = 3
@@ -18,7 +18,7 @@ vidas = [NodePath("MarginVidas/ContenedorVidas/Vida"), NodePath("MarginVidas/Con
 barra = NodePath("CenterContainer/VidaBoss")
 
 [node name="MarginVidas" type="MarginContainer" parent="."]
-layout_mode = 2
+layout_mode = 0
 offset_right = 130.0
 offset_bottom = 70.0
 theme_override_constants/margin_left = 95
@@ -53,11 +53,18 @@ grow_vertical = 0
 theme_override_constants/margin_bottom = 85
 
 [node name="CenterContainer" type="CenterContainer" parent="."]
-layout_mode = 2
-offset_left = 63.0
-offset_top = 531.0
-offset_right = 776.0
-offset_bottom = 611.0
+layout_mode = 1
+anchors_preset = 7
+anchor_left = 0.5
+anchor_top = 1.0
+anchor_right = 0.5
+anchor_bottom = 1.0
+offset_left = -450.0
+offset_top = -141.59003
+offset_right = 450.0
+offset_bottom = -53.58899
+grow_horizontal = 2
+grow_vertical = 0
 
 [node name="VidaBoss" type="TextureProgressBar" parent="CenterContainer"]
 layout_mode = 2

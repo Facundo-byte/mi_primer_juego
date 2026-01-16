@@ -1,0 +1,10 @@
+[gd_resource type="LabelSettings" load_steps=2 format=3 uid="uid://b83jo0a6guxs1"]
+
+[ext_resource type="FontFile" uid="uid://c23o2by0e3dcp" path="res://fonts/PressStart2P-Regular.ttf" id="1_ct5lm"]
+
+[resource]
+font = ExtResource("1_ct5lm")
+font_size = 81
+shadow_size = 36
+shadow_color = Color(0, 0, 0, 0.29411766)
+shadow_offset = Vector2(1, 9.25)

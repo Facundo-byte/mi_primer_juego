@@ -1,7 +1,8 @@
-[gd_scene load_steps=5 format=3 uid="uid://bq8u3vwpqq7u4"]
+[gd_scene load_steps=6 format=3 uid="uid://bq8u3vwpqq7u4"]
 
 [ext_resource type="PackedScene" uid="uid://emgx7nugvuk4" path="res://escenas/nivel/nivel.tscn" id="1_snxy5"]
 [ext_resource type="Script" uid="uid://dtwv644m142qd" path="res://escenas/escena_principal/escena_principal.gd" id="1_yoxmf"]
+[ext_resource type="Script" uid="uid://csvoyjmk1f0qt" path="res://escenas/escena_principal/camera_2d.gd" id="3_rrast"]
 [ext_resource type="Script" uid="uid://bf603amkp5466" path="res://escenas/escena_principal/controlador_pausa.gd" id="3_yoxmf"]
 [ext_resource type="PackedScene" uid="uid://c4t0h5rf33tlf" path="res://escenas/menu_pausa/pausa.tscn" id="4_sbgap"]
 
@@ -10,7 +11,8 @@ script = ExtResource("1_yoxmf")
 niveles = Array[PackedScene]([ExtResource("1_snxy5")])
 
 [node name="Camera2D" type="Camera2D" parent="."]
-position = Vector2(-1, 5)
+scale = Vector2(1, 2.2400002)
+script = ExtResource("3_rrast")
 
 [node name="ControladorPausa" type="Node" parent="." node_paths=PackedStringArray("pausa")]
 process_mode = 3

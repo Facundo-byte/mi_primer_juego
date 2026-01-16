@@ -17,22 +17,34 @@ var mouse_pos
 var direccion_mov := Vector2.ZERO
 var dashing := false
 var puede_dash := true
+var puede_ataque := true
 
 #knockback
 var en_knockback := false
 
+#camara
+var cam
+var cam_rect
 
 func _ready():
 	add_to_group("jugador")
+	cam = get_tree().get_first_node_in_group("camara")
+	cam_rect = cam.obtener_tam_camara()	
 	colision.body_entered.connect(_choque)
 	
 func _process(delta: float):
+	# limitar en base a la camara
+	global_position = global_position.clamp(
+		cam_rect.position + Vector2(32,32),
+		cam_rect.position + cam_rect.size - Vector2(32,32)
+	)
+	
 	if velocity.length() > 0: 
 		direccion_mov = velocity.normalized()
 	if dashing or en_knockback: 
 		move_and_slide()
 		return
-		
+			
 	#movimiento
 	if Input.is_action_pressed("izquierda"): 
 		velocity.x = -_velocidad
@@ -71,7 +83,7 @@ func _process(delta: float):
 	move_and_slide()
 	
 	#ataque 
-	if Input.is_action_just_pressed("ataque"):
+	if Input.is_action_just_pressed("ataque") and puede_ataque:
 		atacar()
 		mostrar_espadazo()
 	
@@ -115,12 +127,14 @@ func mostrar_espadazo():
 	await get_tree().create_timer(0.25).timeout
 	espadazo.area.monitoring = false
 	espadazo.visible = false
+	await get_tree().create_timer(0.15).timeout
+	puede_ataque = true
 	
 
 func obtener_direccion_mouse() -> Vector2: 
 	return (get_global_mouse_position() - global_position).normalized()
 
 func atacar():
+	puede_ataque = false
 	mouse_pos = obtener_direccion_mouse()
 	$Espadazo.rotation = mouse_pos.angle() + deg_to_rad(30)
-	

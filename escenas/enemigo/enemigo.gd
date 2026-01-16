@@ -11,12 +11,14 @@ extends CharacterBody2D
 
 var jugador
 var puede_moverse: bool = true
+var puede_atacar: bool = true
 var en_knockback: bool = false
 
 func _ready():
 	add_to_group("enemigo")
 	jugador = get_tree().get_first_node_in_group("jugador")
 	area_atq.body_entered.connect(_atacar_jugador)
+		
 
 func _process(delta: float):
 	if !puede_moverse: 
@@ -95,13 +97,20 @@ func _atacar_jugador(body):
 		ataque_slash, 
 		null
 	]
-	
+	if !puede_atacar: 
+		return
+		
+	puede_atacar = false
 	var accion = ataques.pick_random()
 	
 	if accion: 
 		#detengo su movimiento
 		puede_moverse = false
-		accion.call()
+		await accion.call()
+		
+	
+	await get_tree().create_timer(0.5).timeout
+	puede_atacar = true
 		
 	
 	
