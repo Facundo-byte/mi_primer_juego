@@ -1,4 +1,4 @@
-[gd_scene load_steps=23 format=3 uid="uid://dg47am2x7xry2"]
+[gd_scene load_steps=25 format=3 uid="uid://dg47am2x7xry2"]
 
 [ext_resource type="Script" uid="uid://cw3jt2fjexckn" path="res://escenas/menus/menus.gd" id="1_1lor4"]
 [ext_resource type="Script" uid="uid://chbx8o2wmkgjl" path="res://escenas/menus/boton_jugar.gd" id="1_wv6ri"]
@@ -19,6 +19,8 @@
 [ext_resource type="Texture2D" uid="uid://c5bn3loeym1dx" path="res://animacion_fondo/animacion8.png" id="17_55fet"]
 [ext_resource type="Texture2D" uid="uid://cb0rde45egrph" path="res://animacion_fondo/animacion9.png" id="18_kujlt"]
 [ext_resource type="Texture2D" uid="uid://cna8qjpcjv4hc" path="res://animacion_fondo/animacion10.png" id="19_ferxq"]
+[ext_resource type="AudioStream" uid="uid://cn3blriy21mef" path="res://sonidos/botones/open.wav" id="21_vbt5b"]
+[ext_resource type="AudioStream" uid="uid://d1vcjcd86hfns" path="res://sonidos/botones/click.wav" id="22_wyey2"]
 
 [sub_resource type="LabelSettings" id="LabelSettings_8lnoy"]
 font = ExtResource("2_4oofs")
@@ -49,7 +51,7 @@ frame_8/duration = 1.0
 frame_9/texture = ExtResource("19_ferxq")
 frame_9/duration = 1.0
 
-[node name="Menu" type="Control" node_paths=PackedStringArray("texto", "titulo", "jugar", "vajugar", "salir", "fondo")]
+[node name="Menu" type="Control" node_paths=PackedStringArray("texto", "titulo", "jugar", "vajugar", "salir", "fondo", "hoverin", "click")]
 layout_mode = 3
 anchors_preset = 15
 anchor_right = 1.0
@@ -63,6 +65,8 @@ jugar = NodePath("Botones/Jugar")
 vajugar = NodePath("Botones/Volverajugar")
 salir = NodePath("Botones/Salir")
 fondo = NodePath("Fondo")
+hoverin = NodePath("hoverin")
+click = NodePath("click")
 
 [node name="Titulo" type="Label" parent="."]
 layout_mode = 1
@@ -145,3 +149,9 @@ grow_horizontal = 2
 grow_vertical = 2
 mouse_filter = 2
 texture = SubResource("AnimatedTexture_qe56y")
+
+[node name="hoverin" type="AudioStreamPlayer2D" parent="."]
+stream = ExtResource("21_vbt5b")
+
+[node name="click" type="AudioStreamPlayer2D" parent="."]
+stream = ExtResource("22_wyey2")

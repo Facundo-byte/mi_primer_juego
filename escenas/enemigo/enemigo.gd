@@ -14,6 +14,11 @@ var puede_moverse: bool = true
 var puede_atacar: bool = true
 var en_knockback: bool = false
 
+#sonidos 
+@export var sslash: AudioStreamPlayer2D
+@export var ssalto: AudioStreamPlayer2D
+@export var scaida: AudioStreamPlayer2D
+
 func _ready():
 	add_to_group("enemigo")
 	jugador = get_tree().get_first_node_in_group("jugador")
@@ -118,6 +123,7 @@ func ataque_slash():
 	var distancia_espadazo: int = 100
 	var dir_jugador = obtener_direccion_jugador()
 	
+	sslash.play()
 	espadazo.global_position = global_position + dir_jugador * distancia_espadazo
 	espadazo.rotation = dir_jugador.angle() + deg_to_rad(30)
 	espadazo.area.monitoring = true
@@ -141,6 +147,7 @@ func ataque_salto():
 	velocity = Vector2(velocity.x + 5, velocity.y)
 	
 	#ejecuto la animacion
+	ssalto.play()
 	sprite.play("jump_down")
 	tween.tween_property(sprite, "position:y", sprite.position.y - 30, 0.25)
 	tween.tween_property(sprite, "position:y", sprite.position.y, 0.25)
@@ -148,6 +155,7 @@ func ataque_salto():
 
 	#humo de caida
 	await get_tree().create_timer(0.5).timeout
+	scaida.play()
 	humo.area.monitoring = true 
 	humo.visible = true
 	humo.anim_humo.stop()

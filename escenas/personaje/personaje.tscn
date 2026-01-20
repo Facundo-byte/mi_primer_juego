@@ -1,9 +1,12 @@
-[gd_scene load_steps=7 format=3 uid="uid://b28kpkrue125o"]
+[gd_scene load_steps=10 format=3 uid="uid://b28kpkrue125o"]
 
 [ext_resource type="Script" uid="uid://cbe8r30ohuak3" path="res://escenas/personaje/personaje.gd" id="1_yv5yb"]
 [ext_resource type="PackedScene" uid="uid://boa0nqil151cx" path="res://escenas/espadazo/espadazo.tscn" id="2_wky4x"]
 [ext_resource type="SpriteFrames" uid="uid://dq5u36olxsdcm" path="res://escenas/personaje/personaje_temporal.tres" id="2_yv5yb"]
 [ext_resource type="Texture2D" uid="uid://csbrp7ytatjlr" path="res://sprites/sombra.png" id="4_n3eqy"]
+[ext_resource type="AudioStream" uid="uid://c4st6pyevah5h" path="res://sonidos/16_human_walk_stone_3.wav" id="5_8trwc"]
+[ext_resource type="AudioStream" uid="uid://csc5bs0sylrjc" path="res://sonidos/15_human_dash_2.wav" id="6_fvrxm"]
+[ext_resource type="AudioStream" uid="uid://dagwpcl5yj2s4" path="res://sonidos/07_human_atk_sword_3.wav" id="7_fvrxm"]
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_yv5yb"]
 size = Vector2(46, 47)
@@ -11,7 +14,7 @@ size = Vector2(46, 47)
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_wky4x"]
 size = Vector2(59, 59)
 
-[node name="Personaje" type="CharacterBody2D" node_paths=PackedStringArray("animacion", "colision")]
+[node name="Personaje" type="CharacterBody2D" node_paths=PackedStringArray("animacion", "colision", "caminata", "dash_sonido", "espadazo_sonido")]
 z_index = 2
 collision_layer = 4
 collision_mask = 11
@@ -19,6 +22,9 @@ platform_floor_layers = 4294967040
 script = ExtResource("1_yv5yb")
 animacion = NodePath("mov_jugador")
 colision = NodePath("area_pj")
+caminata = NodePath("caminata")
+dash_sonido = NodePath("dash")
+espadazo_sonido = NodePath("s_espadazo")
 
 [node name="colision_entorno" type="CollisionShape2D" parent="."]
 visible = false
@@ -47,3 +53,12 @@ z_index = -1
 position = Vector2(3, 18)
 scale = Vector2(2.140625, 2.0546877)
 texture = ExtResource("4_n3eqy")
+
+[node name="caminata" type="AudioStreamPlayer2D" parent="."]
+stream = ExtResource("5_8trwc")
+
+[node name="dash" type="AudioStreamPlayer2D" parent="."]
+stream = ExtResource("6_fvrxm")
+
+[node name="s_espadazo" type="AudioStreamPlayer2D" parent="."]
+stream = ExtResource("7_fvrxm")

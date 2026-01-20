@@ -1,4 +1,4 @@
-[gd_scene load_steps=7 format=3 uid="uid://c4t0h5rf33tlf"]
+[gd_scene load_steps=9 format=3 uid="uid://c4t0h5rf33tlf"]
 
 [ext_resource type="Script" uid="uid://bepqqq8mptdd" path="res://escenas/menu_pausa/pausa.gd" id="1_f0eoy"]
 [ext_resource type="Script" uid="uid://dbi85auc708j2" path="res://escenas/menu_pausa/boton_continuar.gd" id="2_6r4un"]
@@ -6,8 +6,10 @@
 [ext_resource type="Texture2D" uid="uid://bymxesf17acnh" path="res://sprites/continuar.png" id="3_rrk5o"]
 [ext_resource type="Texture2D" uid="uid://cnhuyr78xtkb4" path="res://sprites/Salir.png" id="5_l0fcq"]
 [ext_resource type="Script" uid="uid://bevxfp8eqshwg" path="res://escenas/menu_pausa/salir.gd" id="6_rrk5o"]
+[ext_resource type="AudioStream" uid="uid://cn3blriy21mef" path="res://sonidos/botones/open.wav" id="7_xcfdy"]
+[ext_resource type="AudioStream" uid="uid://d1vcjcd86hfns" path="res://sonidos/botones/click.wav" id="8_ygbby"]
 
-[node name="Control" type="Control" node_paths=PackedStringArray("continuar", "salir")]
+[node name="Control" type="Control" node_paths=PackedStringArray("continuar", "salir", "hover", "click")]
 layout_mode = 3
 anchors_preset = 15
 anchor_right = 1.0
@@ -17,6 +19,8 @@ grow_vertical = 2
 script = ExtResource("1_f0eoy")
 continuar = NodePath("VBoxContainer/Continuar")
 salir = NodePath("VBoxContainer/Salir")
+hover = NodePath("hover")
+click = NodePath("click")
 
 [node name="ColorRect" type="ColorRect" parent="."]
 layout_mode = 1
@@ -70,3 +74,9 @@ script = ExtResource("2_6r4un")
 layout_mode = 2
 texture_normal = ExtResource("5_l0fcq")
 script = ExtResource("6_rrk5o")
+
+[node name="hover" type="AudioStreamPlayer2D" parent="."]
+stream = ExtResource("7_xcfdy")
+
+[node name="click" type="AudioStreamPlayer2D" parent="."]
+stream = ExtResource("8_ygbby")

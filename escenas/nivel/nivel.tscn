@@ -1,4 +1,4 @@
-[gd_scene load_steps=8 format=4 uid="uid://emgx7nugvuk4"]
+[gd_scene load_steps=9 format=4 uid="uid://emgx7nugvuk4"]
 
 [ext_resource type="Script" uid="uid://clfxmnnut1h1e" path="res://escenas/nivel/nivel.gd" id="1_d63yu"]
 [ext_resource type="PackedScene" uid="uid://b28kpkrue125o" path="res://escenas/personaje/personaje.tscn" id="1_g5l2w"]
@@ -7,6 +7,7 @@
 [ext_resource type="PackedScene" uid="uid://c5blocrlej1a8" path="res://escenas/enemigo/enemigo.tscn" id="2_d63yu"]
 [ext_resource type="PackedScene" uid="uid://c1cbgas50opl0" path="res://escenas/bordes/bordes.tscn" id="3_g5l2w"]
 [ext_resource type="PackedScene" uid="uid://do6iehyqys2ys" path="res://escenas/UI/UI.tscn" id="7_y0n4x"]
+[ext_resource type="AudioStream" uid="uid://ccvor2uwuabno" path="res://musica/melodia_final.ogg" id="8_afinf"]
 
 [node name="Nivel" type="Node2D"]
 script = ExtResource("1_d63yu")
@@ -40,3 +41,7 @@ mouse_filter = 2
 
 [node name="Bordes" parent="." instance=ExtResource("3_g5l2w")]
 visible = false
+
+[node name="musica" type="AudioStreamPlayer2D" parent="."]
+stream = ExtResource("8_afinf")
+autoplay = true

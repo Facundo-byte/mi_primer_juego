@@ -4,6 +4,10 @@ extends Node2D
 var _nivel_actual: int = 1
 var _nivel_instanciado: Node 
 
+#sonidos muerte
+@export var sonido_mjugador: AudioStreamPlayer2D
+@export var sonido_menemigo: AudioStreamPlayer2D
+
 func _ready() -> void:
 	_crear_nivel(_nivel_actual)
 	#si el jugador muere cargo derrota
@@ -23,11 +27,14 @@ func _reiniciar_nivel():
 	_crear_nivel.call_deferred(_nivel_actual)
 
 func _cargar_fin(bandera: int):
-	await get_tree().create_timer(0.15).timeout
 	if bandera == 1:
+		sonido_mjugador.play()
 		print("perdiste")
 	else:
+		sonido_menemigo.play()
 		print("ganaste")
+	
+	await get_tree().create_timer(2).timeout
 	call_deferred("_ir_al_menu")
 	#_nivel_actual += 1
 	#_eliminar_nivel()

@@ -1,14 +1,18 @@
-[gd_scene load_steps=6 format=3 uid="uid://bq8u3vwpqq7u4"]
+[gd_scene load_steps=8 format=3 uid="uid://bq8u3vwpqq7u4"]
 
 [ext_resource type="PackedScene" uid="uid://emgx7nugvuk4" path="res://escenas/nivel/nivel.tscn" id="1_snxy5"]
 [ext_resource type="Script" uid="uid://dtwv644m142qd" path="res://escenas/escena_principal/escena_principal.gd" id="1_yoxmf"]
 [ext_resource type="Script" uid="uid://csvoyjmk1f0qt" path="res://escenas/escena_principal/camera_2d.gd" id="3_rrast"]
 [ext_resource type="Script" uid="uid://bf603amkp5466" path="res://escenas/escena_principal/controlador_pausa.gd" id="3_yoxmf"]
 [ext_resource type="PackedScene" uid="uid://c4t0h5rf33tlf" path="res://escenas/menu_pausa/pausa.tscn" id="4_sbgap"]
+[ext_resource type="AudioStream" uid="uid://cmibga67wrnkd" path="res://sonidos/24_orc_death_spin.wav" id="6_px6n3"]
+[ext_resource type="AudioStream" uid="uid://bivs67ncnu3u0" path="res://sonidos/14_human_death_spin.wav" id="7_e307b"]
 
-[node name="EscenaPrincipal" type="Node2D"]
+[node name="EscenaPrincipal" type="Node2D" node_paths=PackedStringArray("sonido_mjugador", "sonido_menemigo")]
 script = ExtResource("1_yoxmf")
 niveles = Array[PackedScene]([ExtResource("1_snxy5")])
+sonido_mjugador = NodePath("muertejugador")
+sonido_menemigo = NodePath("muerteenemigo")
 
 [node name="Camera2D" type="Camera2D" parent="."]
 scale = Vector2(1, 2.2400002)
@@ -28,3 +32,9 @@ anchor_right = 0.0
 anchor_bottom = 0.0
 grow_horizontal = 1
 grow_vertical = 1
+
+[node name="muerteenemigo" type="AudioStreamPlayer2D" parent="."]
+stream = ExtResource("6_px6n3")
+
+[node name="muertejugador" type="AudioStreamPlayer2D" parent="."]
+stream = ExtResource("7_e307b")

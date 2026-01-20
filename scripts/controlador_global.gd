@@ -1,6 +1,6 @@
 extends Node
 
-signal vidas_jugador_act
+signal vida_jugador_act
 signal vida_enemigo_act
 signal jugador_muerto
 signal enemigo_muerto

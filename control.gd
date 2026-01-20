@@ -8,6 +8,10 @@ extends Control
 @export var duracion_knockback := 0.15
 var dir_knockback := Vector2.ZERO
 
+#sonidos
+@export var danio_jugador: AudioStreamPlayer2D
+@export var danio_enemigo: AudioStreamPlayer2D
+
 # Called when the node enters the scene tree for the first time.
 func _ready() -> void:
 	var jugador = get_tree().get_first_node_in_group("jugador") #jugador
@@ -27,10 +31,14 @@ func _actualizar_vidas(jugador: Node2D, enemigo: Node2D):
 	jugador.scale = Vector2(0.800, 0.800)
 	_aplicar_knockback(jugador, dir)
 	
+	#sonido
+	danio_jugador.play()
+	
 	#restar vida
 	ControladorGlobal.restarvidajugador()
 	var ultimo = vidas.pop_back()
-	ultimo.queue_free()
+	if ultimo:
+		ultimo.queue_free()
 
 func _aplicar_knockback(personaje: Node2D, dir: Vector2):
 	personaje.en_knockback = true
@@ -51,6 +59,8 @@ func _actualizar_vida_enemigo(nuevavida, jugador: Node2D, enemigo: Node2D):
 	enemigo.scale = Vector2(0.800, 0.800)
 	_aplicar_knockback(enemigo, dir)
 	
+	#sonido
+	danio_enemigo.play()
 	
 	barra.value = nuevavida
 	

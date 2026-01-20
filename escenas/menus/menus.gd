@@ -12,6 +12,9 @@ var escala_normal := Vector2(1, 1)
 var duracion := 0.10
 var cduracion := 0.05
 
+#sonidos
+@export var hoverin: AudioStreamPlayer2D
+@export var click: AudioStreamPlayer2D
 
 func _ready()-> void: 
 	var tween : Tween = null
@@ -61,6 +64,9 @@ func _hover(tween: Tween, nodoaf: int):
 	tween.set_trans(Tween.TRANS_SINE)
 	tween.set_ease(Tween.EASE_OUT)
 	
+	#sonido
+	hoverin.play()
+	
 func _exit(tween: Tween, nodoaf: int):
 	if tween:
 		tween.kill()
@@ -73,6 +79,7 @@ func _exit(tween: Tween, nodoaf: int):
 	
 	tween.set_trans(Tween.TRANS_SINE)
 	tween.set_ease(Tween.EASE_OUT)
+	
 
 func _click(tween: Tween, nodoaf: int):
 	if tween: 
@@ -92,3 +99,6 @@ func _click(tween: Tween, nodoaf: int):
 			
 	tween.set_trans(Tween.TRANS_SINE)
 	tween.set_ease(Tween.EASE_OUT)
+	
+	#sonido
+	click.play()

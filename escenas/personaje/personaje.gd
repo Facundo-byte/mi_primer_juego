@@ -26,6 +26,11 @@ var en_knockback := false
 var cam
 var cam_rect
 
+#sonidos
+@export var caminata : AudioStreamPlayer2D
+@export var dash_sonido: AudioStreamPlayer2D
+@export var espadazo_sonido: AudioStreamPlayer2D
+
 func _ready():
 	add_to_group("jugador")
 	cam = get_tree().get_first_node_in_group("camara")
@@ -41,10 +46,12 @@ func _process(delta: float):
 	
 	if velocity.length() > 0: 
 		direccion_mov = velocity.normalized()
+		if !caminata.playing:
+			caminata.play()		
 	if dashing or en_knockback: 
 		move_and_slide()
 		return
-			
+	
 	#movimiento
 	if Input.is_action_pressed("izquierda"): 
 		velocity.x = -_velocidad
@@ -97,6 +104,7 @@ func _choque(body: Node) -> void:
 
 #funcion dash
 func _dash():
+	dash_sonido.play()
 	dashing = true
 	collision_layer = 0
 	puede_dash = false 
@@ -135,6 +143,7 @@ func obtener_direccion_mouse() -> Vector2:
 	return (get_global_mouse_position() - global_position).normalized()
 
 func atacar():
+	espadazo_sonido.play()
 	puede_ataque = false
 	mouse_pos = obtener_direccion_mouse()
 	$Espadazo.rotation = mouse_pos.angle() + deg_to_rad(30)

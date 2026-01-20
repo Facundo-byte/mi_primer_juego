@@ -1,10 +1,13 @@
-[gd_scene load_steps=8 format=3 uid="uid://c5blocrlej1a8"]
+[gd_scene load_steps=11 format=3 uid="uid://c5blocrlej1a8"]
 
 [ext_resource type="Script" uid="uid://dob1xht4nd8x6" path="res://escenas/enemigo/enemigo.gd" id="1_r46xo"]
 [ext_resource type="SpriteFrames" uid="uid://xn3dhru08ser" path="res://escenas/enemigo/enemigo_sprites.tres" id="2_r46xo"]
 [ext_resource type="PackedScene" uid="uid://co6a5b0jf07ej" path="res://escenas/enemigo/ataques/salto/humo_caida.tscn" id="3_07say"]
 [ext_resource type="PackedScene" uid="uid://dwhiel60f2hti" path="res://escenas/enemigo/ataques/slash/slashenemigo.tscn" id="4_wc1l2"]
 [ext_resource type="Texture2D" uid="uid://csbrp7ytatjlr" path="res://sprites/sombra.png" id="5_ia6sk"]
+[ext_resource type="AudioStream" uid="uid://dmigogewmts37" path="res://sonidos/17_orc_atk_sword_2.wav" id="6_1rgfv"]
+[ext_resource type="AudioStream" uid="uid://cerccfgx2cnlu" path="res://sonidos/22_orc_jump_1.wav" id="7_wyvlr"]
+[ext_resource type="AudioStream" uid="uid://b7vlgnpbeygxw" path="res://sonidos/23_orc_jump_land.wav" id="8_u05g5"]
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_r46xo"]
 size = Vector2(57, 50)
@@ -12,7 +15,7 @@ size = Vector2(57, 50)
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_07say"]
 size = Vector2(305, 261)
 
-[node name="Enemigo" type="CharacterBody2D" node_paths=PackedStringArray("sprite", "area_atq", "humo", "espadazo")]
+[node name="Enemigo" type="CharacterBody2D" node_paths=PackedStringArray("sprite", "area_atq", "humo", "espadazo", "sslash", "ssalto", "scaida")]
 z_index = 2
 collision_layer = 8
 collision_mask = 5
@@ -22,6 +25,9 @@ _velocidad = 100.0
 area_atq = NodePath("area_atq")
 humo = NodePath("humo")
 espadazo = NodePath("Slashenemigo")
+sslash = NodePath("s_slash")
+ssalto = NodePath("s_salto")
+scaida = NodePath("s_caida")
 
 [node name="AnimatedSprite2D" type="AnimatedSprite2D" parent="."]
 scale = Vector2(0.965, 0.965)
@@ -64,5 +70,14 @@ z_index = -1
 position = Vector2(3, 18)
 scale = Vector2(2.140625, 2.0546877)
 texture = ExtResource("5_ia6sk")
+
+[node name="s_slash" type="AudioStreamPlayer2D" parent="."]
+stream = ExtResource("6_1rgfv")
+
+[node name="s_salto" type="AudioStreamPlayer2D" parent="."]
+stream = ExtResource("7_wyvlr")
+
+[node name="s_caida" type="AudioStreamPlayer2D" parent="."]
+stream = ExtResource("8_u05g5")
 
 [connection signal="timeout" from="Timer" to="." method="_on_timer_timeout"]

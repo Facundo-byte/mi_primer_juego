@@ -8,6 +8,10 @@ var escala_normal := Vector2(1, 1)
 var duracion := 0.10
 var cduracion := 0.05
 
+#sonidos
+@export var hover: AudioStreamPlayer2D
+@export var click: AudioStreamPlayer2D
+
 # Called when the node enters the scene tree for the first time.
 func _ready() -> void:
 	var tween : Tween = null
@@ -43,6 +47,9 @@ func _hover(tween: Tween, nodoaf: int):
 	tween.set_trans(Tween.TRANS_SINE)
 	tween.set_ease(Tween.EASE_OUT)
 	
+	#sonido
+	hover.play()
+	
 func _exit(tween: Tween, nodoaf: int):
 	if tween:
 		tween.kill()
@@ -72,3 +79,6 @@ func _click(tween: Tween, nodoaf: int):
 			
 	tween.set_trans(Tween.TRANS_SINE)
 	tween.set_ease(Tween.EASE_OUT)
+	
+	#sonido
+	click.play()
