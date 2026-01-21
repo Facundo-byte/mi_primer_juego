@@ -8,24 +8,28 @@ extends CharacterBody2D
 @export var area_atq: Area2D
 @export var humo: Node2D
 @export var espadazo: Node2D
+@export var alerta: AnimatedSprite2D
 
 var jugador
 var puede_moverse: bool = true
 var puede_atacar: bool = true
 var en_knockback: bool = false
+var muriendo: bool = false
 
 #sonidos 
 @export var sslash: AudioStreamPlayer2D
 @export var ssalto: AudioStreamPlayer2D
 @export var scaida: AudioStreamPlayer2D
+@export var salerta: AudioStreamPlayer2D
 
 func _ready():
 	add_to_group("enemigo")
 	jugador = get_tree().get_first_node_in_group("jugador")
 	area_atq.body_entered.connect(_atacar_jugador)
 		
-
 func _process(delta: float):
+	if muriendo:
+		return
 	if !puede_moverse: 
 		velocity = Vector2.ZERO 
 		move_and_slide()
@@ -99,21 +103,29 @@ func obtener_direccion() -> String:
 func _atacar_jugador(body):
 	var ataques = [
 		ataque_salto,
-		ataque_slash, 
-		null
+		ataque_slash
 	]
+	
 	if !puede_atacar: 
 		return
 		
 	puede_atacar = false
 	var accion = ataques.pick_random()
+	espadazo.ya_golpeo = false
+	
+	#alerta de ataque
+	alerta.visible = true
+	alerta.global_position = global_position + Vector2(0,-50)
+	alerta.play("default")
+	salerta.play()
+	await get_tree().create_timer(0.5).timeout
+	alerta.visible = false
 	
 	if accion: 
 		#detengo su movimiento
 		puede_moverse = false
 		await accion.call()
 		
-	
 	await get_tree().create_timer(0.5).timeout
 	puede_atacar = true
 		
@@ -121,18 +133,20 @@ func _atacar_jugador(body):
 	
 func ataque_slash(): 
 	var distancia_espadazo: int = 100
+
+	# ataque	
 	var dir_jugador = obtener_direccion_jugador()
-	
+
 	sslash.play()
 	espadazo.global_position = global_position + dir_jugador * distancia_espadazo
 	espadazo.rotation = dir_jugador.angle() + deg_to_rad(30)
-	espadazo.area.monitoring = true
 	espadazo.visible = true 
 	espadazo.anim_ataque.stop()
 	espadazo.anim_ataque.frame = 0
 	espadazo.anim_ataque.play("ataque")
+	espadazo.area.monitoring = true
 	
-	await get_tree().create_timer(0.25).timeout
+	await(espadazo.anim_ataque.animation_finished)
 	espadazo.area.monitoring = false
 	espadazo.visible = false
 	

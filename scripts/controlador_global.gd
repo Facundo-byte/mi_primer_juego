@@ -6,8 +6,8 @@ signal jugador_muerto
 signal enemigo_muerto
 
 var vidas_jugador: int = 3
-var vida_enemigo: float = 100 
-var dmg_jugador: float = 20
+var vida_enemigo: float = 100
+var dmg_jugador: float = 5
 var estado: int
 
 func restarvidajugador():

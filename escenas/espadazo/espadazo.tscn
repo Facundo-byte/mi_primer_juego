@@ -25,5 +25,5 @@ shape = SubResource("RectangleShape2D_d703y")
 scale = Vector2(2.65625, 2.5625)
 sprite_frames = ExtResource("1_diom0")
 animation = &"ataque"
-frame = 3
+frame = 2
 frame_progress = 1.0

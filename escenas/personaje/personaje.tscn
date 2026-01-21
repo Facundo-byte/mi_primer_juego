@@ -35,8 +35,7 @@ shape = SubResource("RectangleShape2D_yv5yb")
 
 [node name="mov_jugador" type="AnimatedSprite2D" parent="."]
 sprite_frames = ExtResource("2_yv5yb")
-animation = &"idle_upandright"
-frame_progress = 0.71079534
+animation = &"idle_down"
 
 [node name="area_pj" type="Area2D" parent="."]
 visible = false

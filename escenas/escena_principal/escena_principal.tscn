@@ -18,8 +18,9 @@ sonido_menemigo = NodePath("muerteenemigo")
 scale = Vector2(1, 2.2400002)
 script = ExtResource("3_rrast")
 
-[node name="ControladorPausa" type="Node" parent="." node_paths=PackedStringArray("pausa")]
+[node name="ControladorPausa" type="CanvasLayer" parent="." node_paths=PackedStringArray("pausa")]
 process_mode = 3
+follow_viewport_enabled = true
 script = ExtResource("3_yoxmf")
 pausa = NodePath("pausa")
 

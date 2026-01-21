@@ -1,11 +1,18 @@
-[gd_resource type="SpriteFrames" load_steps=25 format=3 uid="uid://xn3dhru08ser"]
+[gd_resource type="SpriteFrames" load_steps=32 format=3 uid="uid://xn3dhru08ser"]
 
 [ext_resource type="Texture2D" uid="uid://d1jwxba46tjkg" path="res://sprites/personajes/Monster/idle_down (1).png" id="1_5xiwm"]
+[ext_resource type="Texture2D" uid="uid://crxmc4l14i3b5" path="res://sprites/personajes/Death FX/deathFX (1).png" id="1_bidnc"]
 [ext_resource type="Texture2D" uid="uid://f8hhjsk2weo3" path="res://sprites/personajes/Monster/idle_down (2).png" id="2_4wh0j"]
+[ext_resource type="Texture2D" uid="uid://x03bw1xeoacw" path="res://sprites/personajes/Death FX/deathFX (2).png" id="2_a8cir"]
 [ext_resource type="Texture2D" uid="uid://cyrwg3broif1q" path="res://sprites/personajes/Monster/idle_down (3).png" id="3_ih0by"]
+[ext_resource type="Texture2D" uid="uid://clf31j0wy4j35" path="res://sprites/personajes/Death FX/deathFX (3).png" id="3_q8mu1"]
 [ext_resource type="Texture2D" uid="uid://5gcj0tl3xf2f" path="res://sprites/personajes/Monster/idle_down (4).png" id="4_6b3gf"]
+[ext_resource type="Texture2D" uid="uid://c8c7v2ok815he" path="res://sprites/personajes/Death FX/deathFX (4).png" id="4_78yfs"]
+[ext_resource type="Texture2D" uid="uid://b1x4cm20mq25y" path="res://sprites/personajes/Death FX/deathFX (5).png" id="5_0aibc"]
 [ext_resource type="Texture2D" uid="uid://cp4wqh2wt8v47" path="res://sprites/personajes/Monster/idle_down_right (1).png" id="5_7ep3v"]
 [ext_resource type="Texture2D" uid="uid://cqd1hrbvnf0s8" path="res://sprites/personajes/Monster/idle_down_right (2).png" id="6_114qb"]
+[ext_resource type="Texture2D" uid="uid://b77gdyfw6u3ev" path="res://sprites/personajes/Death FX/deathFX (6).png" id="6_t8pav"]
+[ext_resource type="Texture2D" uid="uid://cclmteg43rvpd" path="res://sprites/personajes/Death FX/deathFX (7).png" id="7_bu3nb"]
 [ext_resource type="Texture2D" uid="uid://danrix5frorhp" path="res://sprites/personajes/Monster/idle_down_right (3).png" id="7_wehbd"]
 [ext_resource type="Texture2D" uid="uid://ggmjrcrhso4x" path="res://sprites/personajes/Monster/idle_down_right (4).png" id="8_iciex"]
 [ext_resource type="Texture2D" uid="uid://dbl31hh73lx5" path="res://sprites/personajes/Monster/idle_right (1).png" id="9_lxodo"]
@@ -27,6 +34,32 @@
 
 [resource]
 animations = [{
+"frames": [{
+"duration": 1.0,
+"texture": ExtResource("1_bidnc")
+}, {
+"duration": 1.0,
+"texture": ExtResource("2_a8cir")
+}, {
+"duration": 1.0,
+"texture": ExtResource("3_q8mu1")
+}, {
+"duration": 1.0,
+"texture": ExtResource("4_78yfs")
+}, {
+"duration": 1.0,
+"texture": ExtResource("5_0aibc")
+}, {
+"duration": 1.0,
+"texture": ExtResource("6_t8pav")
+}, {
+"duration": 1.0,
+"texture": ExtResource("7_bu3nb")
+}],
+"loop": true,
+"name": &"death",
+"speed": 5.0
+}, {
 "frames": [{
 "duration": 1.0,
 "texture": ExtResource("1_5xiwm")

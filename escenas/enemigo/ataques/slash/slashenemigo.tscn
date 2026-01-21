@@ -1,29 +1,61 @@
-[gd_scene load_steps=4 format=3 uid="uid://dwhiel60f2hti"]
+[gd_scene load_steps=9 format=3 uid="uid://dwhiel60f2hti"]
 
-[ext_resource type="SpriteFrames" uid="uid://dbnwa0ckakmd7" path="res://escenas/espadazo/espadazo.tres" id="1_boob3"]
 [ext_resource type="Script" uid="uid://d1eawata5leid" path="res://escenas/enemigo/ataques/slash/slash_enemigo.gd" id="1_ml7x7"]
+[ext_resource type="Texture2D" uid="uid://dr6ltesk722fm" path="res://sprites/espadazo_enemigo.png" id="3_sqmld"]
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_ml7x7"]
-size = Vector2(93, 92)
+size = Vector2(128.5, 121.5)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_vjkvx"]
+atlas = ExtResource("3_sqmld")
+region = Rect2(0, 0, 32, 32)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_2cgc0"]
+atlas = ExtResource("3_sqmld")
+region = Rect2(32, 0, 32, 32)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_0jxsw"]
+atlas = ExtResource("3_sqmld")
+region = Rect2(0, 32, 32, 32)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_nfwxv"]
+atlas = ExtResource("3_sqmld")
+region = Rect2(32, 32, 32, 32)
+
+[sub_resource type="SpriteFrames" id="SpriteFrames_7jqj1"]
+animations = [{
+"frames": [{
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_vjkvx")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_2cgc0")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_0jxsw")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_nfwxv")
+}],
+"loop": false,
+"name": &"ataque",
+"speed": 24.0
+}]
 
 [node name="Slashenemigo" type="Node2D" node_paths=PackedStringArray("anim_ataque", "area")]
 script = ExtResource("1_ml7x7")
-anim_ataque = NodePath("atq_jugador")
+anim_ataque = NodePath("anim_ataque")
 area = NodePath("Hitbox")
 
 [node name="Hitbox" type="Area2D" parent="."]
 collision_layer = 16
-collision_mask = 8
+collision_mask = 4
 monitoring = false
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="Hitbox"]
-position = Vector2(-0.5, -2)
 shape = SubResource("RectangleShape2D_ml7x7")
 
-[node name="atq_jugador" type="AnimatedSprite2D" parent="."]
-modulate = Color(0.760784, 0, 0, 1)
-scale = Vector2(2.65625, 2.5625)
-sprite_frames = ExtResource("1_boob3")
+[node name="anim_ataque" type="AnimatedSprite2D" parent="."]
+scale = Vector2(3.844, 3.75)
+sprite_frames = SubResource("SpriteFrames_7jqj1")
 animation = &"ataque"
-frame = 3
-frame_progress = 1.0

@@ -1,4 +1,4 @@
-[gd_scene load_steps=11 format=3 uid="uid://c5blocrlej1a8"]
+[gd_scene load_steps=16 format=3 uid="uid://c5blocrlej1a8"]
 
 [ext_resource type="Script" uid="uid://dob1xht4nd8x6" path="res://escenas/enemigo/enemigo.gd" id="1_r46xo"]
 [ext_resource type="SpriteFrames" uid="uid://xn3dhru08ser" path="res://escenas/enemigo/enemigo_sprites.tres" id="2_r46xo"]
@@ -8,6 +8,8 @@
 [ext_resource type="AudioStream" uid="uid://dmigogewmts37" path="res://sonidos/17_orc_atk_sword_2.wav" id="6_1rgfv"]
 [ext_resource type="AudioStream" uid="uid://cerccfgx2cnlu" path="res://sonidos/22_orc_jump_1.wav" id="7_wyvlr"]
 [ext_resource type="AudioStream" uid="uid://b7vlgnpbeygxw" path="res://sonidos/23_orc_jump_land.wav" id="8_u05g5"]
+[ext_resource type="Texture2D" uid="uid://bgg76xuoshbvm" path="res://sprites/alerta.png" id="9_wyvlr"]
+[ext_resource type="AudioStream" uid="uid://fi7n8ebdna05" path="res://sonidos/alerta.ogg" id="10_u05g5"]
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_r46xo"]
 size = Vector2(57, 50)
@@ -15,7 +17,29 @@ size = Vector2(57, 50)
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_07say"]
 size = Vector2(305, 261)
 
-[node name="Enemigo" type="CharacterBody2D" node_paths=PackedStringArray("sprite", "area_atq", "humo", "espadazo", "sslash", "ssalto", "scaida")]
+[sub_resource type="AtlasTexture" id="AtlasTexture_u05g5"]
+atlas = ExtResource("9_wyvlr")
+region = Rect2(0, 0, 32, 32)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_56ivy"]
+atlas = ExtResource("9_wyvlr")
+region = Rect2(0, 32, 32, 32)
+
+[sub_resource type="SpriteFrames" id="SpriteFrames_v2l70"]
+animations = [{
+"frames": [{
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_u05g5")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_56ivy")
+}],
+"loop": true,
+"name": &"default",
+"speed": 5.0
+}]
+
+[node name="Enemigo" type="CharacterBody2D" node_paths=PackedStringArray("sprite", "area_atq", "humo", "espadazo", "alerta", "sslash", "ssalto", "scaida", "salerta")]
 z_index = 2
 collision_layer = 8
 collision_mask = 5
@@ -25,9 +49,11 @@ _velocidad = 100.0
 area_atq = NodePath("area_atq")
 humo = NodePath("humo")
 espadazo = NodePath("Slashenemigo")
+alerta = NodePath("alerta")
 sslash = NodePath("s_slash")
 ssalto = NodePath("s_salto")
 scaida = NodePath("s_caida")
+salerta = NodePath("s_alerta")
 
 [node name="AnimatedSprite2D" type="AnimatedSprite2D" parent="."]
 scale = Vector2(0.965, 0.965)
@@ -35,7 +61,6 @@ sprite_frames = ExtResource("2_r46xo")
 animation = &"idle_down"
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="."]
-visible = false
 position = Vector2(-0.5, -1)
 shape = SubResource("RectangleShape2D_r46xo")
 
@@ -62,7 +87,7 @@ scale = Vector2(14.525, 14.525)
 
 [node name="Slashenemigo" parent="." instance=ExtResource("4_wc1l2")]
 visible = false
-scale = Vector2(2.105, 2.105)
+scale = Vector2(1.625, 1.625)
 
 [node name="sombra" type="Sprite2D" parent="."]
 modulate = Color(1, 1, 1, 0.3019608)
@@ -79,5 +104,12 @@ stream = ExtResource("7_wyvlr")
 
 [node name="s_caida" type="AudioStreamPlayer2D" parent="."]
 stream = ExtResource("8_u05g5")
+
+[node name="alerta" type="AnimatedSprite2D" parent="."]
+visible = false
+sprite_frames = SubResource("SpriteFrames_v2l70")
+
+[node name="s_alerta" type="AudioStreamPlayer2D" parent="."]
+stream = ExtResource("10_u05g5")
 
 [connection signal="timeout" from="Timer" to="." method="_on_timer_timeout"]

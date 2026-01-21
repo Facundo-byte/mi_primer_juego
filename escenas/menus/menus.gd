@@ -15,6 +15,9 @@ var cduracion := 0.05
 #sonidos
 @export var hoverin: AudioStreamPlayer2D
 @export var click: AudioStreamPlayer2D
+@export var swin: AudioStreamPlayer2D
+@export var slose: AudioStreamPlayer2D
+@export var musica: AudioStreamPlayer2D
 
 func _ready()-> void: 
 	var tween : Tween = null
@@ -38,18 +41,21 @@ func _ready()-> void:
 		texto.visible = true
 		texto.text = "Victoria!"
 		fondo.visible = false
-		texto.add_theme_color_override("font_color", Color(1.0, 0.0, 0.0))
+		texto.modulate = Color(0,1,0)
+		swin.play()
 		jugar.visible = false
 		vajugar.visible = true
 	elif ControladorGlobal.estado == 2: #si se murio el jugador
 		titulo.visible = false
 		texto.visible = true
 		fondo.visible = false
-		texto.add_theme_color_override("font_color", Color(0.0, 1.0, 0.0))
-		texto.remove_theme_color_override("font_color")
 		texto.text = "Perdiste"
+		texto.modulate = Color(1,0,0)
+		slose.play()
 		jugar.visible = false
 		vajugar.visible = true
+	else:
+		musica.play()
 		
 func _hover(tween: Tween, nodoaf: int):
 	if tween: 

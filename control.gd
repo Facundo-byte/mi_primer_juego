@@ -19,10 +19,13 @@ func _ready() -> void:
 	var espadazo = get_tree().get_first_node_in_group("espadazo")
 	var enemigo = get_tree().get_first_node_in_group("enemigo")
 	
-	jugador.danio_recibido.connect(_actualizar_vidas.bind(jugador, enemigo))
+	if !jugador.invulnerable and !jugador.muriendo:
+		jugador.danio_recibido.connect(_actualizar_vidas.bind(jugador, enemigo))
+		humo.tocado.connect(_actualizar_vidas.bind(jugador, enemigo))
+		espadazo.tocado2.connect(_actualizar_vidas.bind(jugador, enemigo))
+		
 	ControladorGlobal.vida_enemigo_act.connect(_actualizar_vida_enemigo.bind(jugador, enemigo))
-	humo.tocado.connect(_actualizar_vidas.bind(jugador, enemigo))
-	espadazo.tocado2.connect(_actualizar_vidas.bind(jugador, enemigo))
+	
 	
 func _actualizar_vidas(jugador: Node2D, enemigo: Node2D):
 	#aplicar knockback

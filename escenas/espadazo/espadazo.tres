@@ -2,36 +2,36 @@
 
 [ext_resource type="Texture2D" uid="uid://d3mqgg30l6umr" path="res://sprites/espadazo-Sheet-export.png" id="1_6wilo"]
 
-[sub_resource type="AtlasTexture" id="AtlasTexture_ytfwi"]
-atlas = ExtResource("1_6wilo")
-region = Rect2(0, 0, 32, 32)
-
-[sub_resource type="AtlasTexture" id="AtlasTexture_8xx1m"]
-atlas = ExtResource("1_6wilo")
-region = Rect2(32, 0, 32, 32)
-
 [sub_resource type="AtlasTexture" id="AtlasTexture_2wel5"]
 atlas = ExtResource("1_6wilo")
 region = Rect2(0, 32, 32, 32)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_ytfwi"]
+atlas = ExtResource("1_6wilo")
+region = Rect2(0, 0, 32, 32)
 
 [sub_resource type="AtlasTexture" id="AtlasTexture_38u5e"]
 atlas = ExtResource("1_6wilo")
 region = Rect2(32, 32, 32, 32)
 
+[sub_resource type="AtlasTexture" id="AtlasTexture_8xx1m"]
+atlas = ExtResource("1_6wilo")
+region = Rect2(32, 0, 32, 32)
+
 [resource]
 animations = [{
 "frames": [{
 "duration": 1.0,
-"texture": SubResource("AtlasTexture_ytfwi")
-}, {
-"duration": 1.0,
-"texture": SubResource("AtlasTexture_8xx1m")
-}, {
-"duration": 1.0,
 "texture": SubResource("AtlasTexture_2wel5")
 }, {
 "duration": 1.0,
+"texture": SubResource("AtlasTexture_ytfwi")
+}, {
+"duration": 1.0,
 "texture": SubResource("AtlasTexture_38u5e")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_8xx1m")
 }],
 "loop": false,
 "name": &"ataque",
