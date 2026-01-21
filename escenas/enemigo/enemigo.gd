@@ -25,7 +25,8 @@ var muriendo: bool = false
 func _ready():
 	add_to_group("enemigo")
 	jugador = get_tree().get_first_node_in_group("jugador")
-	area_atq.body_entered.connect(_atacar_jugador)
+	if !muriendo:
+		area_atq.body_entered.connect(_atacar_jugador)
 		
 func _process(delta: float):
 	if muriendo:

@@ -128,7 +128,8 @@ func _process(delta):
 
 # colision con enemigo 
 func _choque(body: Node) -> void:
-	danio_recibido.emit()
+	if !muriendo:
+		danio_recibido.emit()
 	print("hola")
 
 #funcion dash
