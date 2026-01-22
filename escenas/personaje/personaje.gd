@@ -165,7 +165,7 @@ func mostrar_espadazo():
 	await(espadazo.anim_ataque.animation_finished)
 	espadazo.area.monitoring = false
 	espadazo.visible = false
-	await get_tree().create_timer(0.15).timeout
+	await get_tree().create_timer(0.30).timeout
 	puede_ataque = true
 	
 
