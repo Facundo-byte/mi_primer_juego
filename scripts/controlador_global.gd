@@ -23,11 +23,11 @@ func restarvidajugador():
 func restarvidaenemigo(body: Node):
 	print("golpeado")
 	vida_enemigo -= dmg_jugador
+	vida_enemigo_act.emit(vida_enemigo)
 	if vida_enemigo == 0: 
 		print(vida_enemigo)
 		estado = 1
 		enemigo_muerto.emit()
 	else:
 		print(vida_enemigo)
-		vida_enemigo_act.emit(vida_enemigo)
 		

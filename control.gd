@@ -4,7 +4,7 @@ extends Control
 @export var barra: TextureProgressBar
 
 #knockback 
-@export var fuerza_knockback := 500
+@export var fuerza_knockback := 300
 @export var duracion_knockback := 0.15
 var dir_knockback := Vector2.ZERO
 
@@ -14,20 +14,23 @@ var dir_knockback := Vector2.ZERO
 
 # Called when the node enters the scene tree for the first time.
 func _ready() -> void:
+	add_to_group("controlador")
+	
 	var jugador = get_tree().get_first_node_in_group("jugador") #jugador
+	var enemigo = get_tree().get_first_node_in_group("enemigo")
+	#ataques
 	var humo = get_tree().get_first_node_in_group("humo") #humo que lo impacto
 	var espadazo = get_tree().get_first_node_in_group("espadazo")
-	var enemigo = get_tree().get_first_node_in_group("enemigo")
 	
 	if !jugador.invulnerable and !jugador.muriendo:
-		jugador.danio_recibido.connect(_actualizar_vidas.bind(jugador, enemigo))
-		humo.tocado.connect(_actualizar_vidas.bind(jugador, enemigo))
-		espadazo.tocado2.connect(_actualizar_vidas.bind(jugador, enemigo))
+		jugador.danio_recibido.connect(actualizar_vidas.bind(jugador, enemigo))
+		humo.tocado.connect(actualizar_vidas.bind(jugador, enemigo))
+		espadazo.tocado2.connect(actualizar_vidas.bind(jugador, enemigo))
 		
 	ControladorGlobal.vida_enemigo_act.connect(_actualizar_vida_enemigo.bind(jugador, enemigo))
 	
 	
-func _actualizar_vidas(jugador: Node2D, enemigo: Node2D):
+func actualizar_vidas(jugador: Node2D, enemigo: Node2D):
 	#aplicar knockback
 	var dir = (jugador.global_position - enemigo.global_position).normalized()
 	jugador.modulate = Color(1.0, 0.0, 0.0)
@@ -65,5 +68,6 @@ func _actualizar_vida_enemigo(nuevavida, jugador: Node2D, enemigo: Node2D):
 	#sonido
 	danio_enemigo.play()
 	
+	print("act")
 	barra.value = nuevavida
 	

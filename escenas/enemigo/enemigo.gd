@@ -15,6 +15,8 @@ var puede_moverse: bool = true
 var puede_atacar: bool = true
 var en_knockback: bool = false
 var muriendo: bool = false
+var distancia_espadazo: int = 100
+var distancia_bala: int = 50
 
 #sonidos 
 @export var sslash: AudioStreamPlayer2D
@@ -22,11 +24,15 @@ var muriendo: bool = false
 @export var scaida: AudioStreamPlayer2D
 @export var salerta: AudioStreamPlayer2D
 
+#bala 
+@export var bala_escena: PackedScene
+
 func _ready():
 	add_to_group("enemigo")
 	jugador = get_tree().get_first_node_in_group("jugador")
-	if !muriendo:
-		area_atq.body_entered.connect(_atacar_jugador)
+	if !muriendo and puede_atacar:
+		area_atq.body_entered.connect(_atacar_jugador.bind(0))
+		
 		
 func _process(delta: float):
 	if muriendo:
@@ -101,18 +107,16 @@ func obtener_direccion() -> String:
 	return "idle"
 
 # ataque 
-func _atacar_jugador(body):
+func _atacar_jugador(body, llamado: int):
 	var ataques = [
 		ataque_salto,
 		ataque_slash
 	]
 	
-	if !puede_atacar: 
+	if !puede_atacar or muriendo: 
 		return
-		
-	puede_atacar = false
-	var accion = ataques.pick_random()
-	espadazo.ya_golpeo = false
+	
+	area_atq.call_deferred("set_monitoring", false)
 	
 	#alerta de ataque
 	alerta.visible = true
@@ -122,19 +126,25 @@ func _atacar_jugador(body):
 	await get_tree().create_timer(0.5).timeout
 	alerta.visible = false
 	
-	if accion: 
-		#detengo su movimiento
-		puede_moverse = false
-		await accion.call()
+	if llamado == 1 and puede_atacar and !muriendo:
+		puede_atacar = false 
+		await ataque_disparo()
+	elif puede_atacar and !muriendo:
+		puede_atacar = false
+		var accion = ataques.pick_random()
+		espadazo.ya_golpeo = false
+		
+		if accion: 
+			#detengo su movimiento
+			puede_moverse = false
+			await accion.call()
 		
 	await get_tree().create_timer(0.5).timeout
 	puede_atacar = true
-		
+	area_atq.call_deferred("set_monitoring", true)
 	
 	
 func ataque_slash(): 
-	var distancia_espadazo: int = 100
-
 	# ataque	
 	var dir_jugador = obtener_direccion_jugador()
 
@@ -183,3 +193,26 @@ func ataque_salto():
 	humo.area.monitoring = false
 	
 	puede_moverse = true
+
+func ataque_disparo():
+	var dir_jugador = obtener_direccion_jugador()
+	var bala = bala_escena.instantiate() 
+	
+	
+	bala.global_position = global_position + dir_jugador * distancia_bala
+	bala.direction = dir_jugador
+	get_tree().current_scene.add_child(bala)
+	
+	await get_tree().create_timer(0.1).timeout
+	puede_moverse = true
+	
+	await get_tree().create_timer(0.5).timeout
+
+func distancia_al_jugador() -> float:
+	return global_position.distance_to(jugador.global_position)
+
+func _on_cooldown_shoot_timeout() -> void:
+	var distancia = distancia_al_jugador()
+	
+	if distancia > 200 and puede_atacar:
+		_atacar_jugador(jugador, 1) # Replace with function body.

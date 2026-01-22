@@ -47,6 +47,7 @@ collision_mask = 5
 script = ExtResource("1_r46xo")
 sprite = NodePath("AnimatedSprite2D")
 _velocidad = 100.0
+vida = null
 area_atq = NodePath("area_atq")
 humo = NodePath("humo")
 espadazo = NodePath("Slashenemigo")
@@ -55,7 +56,7 @@ sslash = NodePath("s_slash")
 ssalto = NodePath("s_salto")
 scaida = NodePath("s_caida")
 salerta = NodePath("s_alerta")
-bala_escena = ExtResource("5_56ivy")
+d_cooldown = null
 
 [node name="AnimatedSprite2D" type="AnimatedSprite2D" parent="."]
 scale = Vector2(0.965, 0.965)
@@ -68,10 +69,6 @@ shape = SubResource("RectangleShape2D_r46xo")
 
 [node name="Timer" type="Timer" parent="."]
 wait_time = 0.2
-autostart = true
-
-[node name="cooldown_shoot" type="Timer" parent="."]
-wait_time = 1.5
 autostart = true
 
 [node name="NavigationAgent2D" type="NavigationAgent2D" parent="."]
@@ -93,7 +90,10 @@ scale = Vector2(14.525, 14.525)
 
 [node name="Slashenemigo" parent="." instance=ExtResource("4_wc1l2")]
 visible = false
-scale = Vector2(1.3, 1.3)
+scale = Vector2(1.625, 1.625)
+
+[node name="proyectil" parent="." instance=ExtResource("5_56ivy")]
+visible = false
 
 [node name="sombra" type="Sprite2D" parent="."]
 modulate = Color(1, 1, 1, 0.3019608)
@@ -119,4 +119,3 @@ sprite_frames = SubResource("SpriteFrames_v2l70")
 stream = ExtResource("10_u05g5")
 
 [connection signal="timeout" from="Timer" to="." method="_on_timer_timeout"]
-[connection signal="timeout" from="cooldown_shoot" to="." method="_on_cooldown_shoot_timeout"]
